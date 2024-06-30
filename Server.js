@@ -13,13 +13,16 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
+
 // require("./Controllers/EmailSender");
 const UserRoutes = require("./Routes/Users");
 app.use("/", UserRoutes);
 
 const UserLoginVerification = require("./Middleware/UserLoginVerification");
 app.use("/", UserLoginVerification);
-
+app.get("/", (req, res) => {
+  res.send("Server is Running");
+});
 app.listen(PORT, () => {
   console.log(`Server IS RUNNING ON PORT ${PORT}`);
 });
