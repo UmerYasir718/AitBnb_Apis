@@ -1,0 +1,18 @@
+const express = require("express");
+const app = express();
+const router = express.Router();
+const cors = require("cors");
+router.use(cors());
+const { UserRegistration } = require("../Controllers/UserRegistration");
+const { UserLogin } = require("../Controllers/UserLogin");
+const { BookingHostel } = require("../Controllers/BookingHostel");
+const { ForgetPassword } = require("../Controllers/ForgetPassword");
+const { ResetPassword } = require("../Controllers/ResetPassword");
+const { SearchHostel } = require("../Controllers/SearchHostel");
+router.post("/signup", UserRegistration);
+router.post("/login", UserLogin);
+router.post("/book", BookingHostel);
+router.post("/forgetPassword", ForgetPassword);
+router.post("/resetPassword/:id/:token", ResetPassword);
+router.post("./search", SearchHostel);
+module.exports = router;
