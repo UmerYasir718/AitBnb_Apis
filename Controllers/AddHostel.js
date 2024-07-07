@@ -39,20 +39,9 @@ module.exports.AddHostel = async (req, res) => {
       return res.status(400).send("No Model uploaded.");
     }
     console.log(uploadedImage);
-
-    // const imageFiles = Array.isArray(uploadedImage)
-    //   ? uploadedImage
-    //   : [uploadedImage];
-
-    // // Upload images to Cloudinary concurrently
-    // const imageUploadPromises = imageFiles.map((file) =>
-    //   cloudinary.uploader.upload(file.tempFilePath)
-    // );
-    // const uploadedImagesData = await Promise.all(imageUploadPromises);
     const img = await cloudinary.uploader.upload(uploadedImage.tempFilePath);
     const model = await cloudinary.uploader.upload(uploadedModel.tempFilePath);
 
-    // const imageUrls = uploadedImagesData.map((data) => data.url);
     const imageUrl = img.url;
     const modelUrl = model.url;
     let picture = await addHostel.create({
@@ -70,5 +59,16 @@ module.exports.AddHostel = async (req, res) => {
   } catch (error) {
     console.error("Error creating item:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports.DeleteHostel = async (req, res) => {
+  const countryId = req.params.id;
+
+  try {
+    await addHostel.findByIdAndDelete(countryId);
+    res.json({ message: "Hostel deleted successfully" });
+  } catch (error) {
+    res.json({ error: "Error deleting item" });
   }
 };

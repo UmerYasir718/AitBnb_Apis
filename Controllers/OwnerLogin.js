@@ -36,7 +36,7 @@ module.exports.OwnerLogin = async (req, res) => {
           .status(400)
           .json({ success: false, message: "Invalid Credential " });
       } else {
-        const token = jwt.sign({ ownerData }, process.env.SecretKey, {
+        const token = jwt.sign({ ownerData }, process.env.OwnerSecretKey, {
           expiresIn: "1h",
         });
         res.cookie("token", token, { httpOnly: true });

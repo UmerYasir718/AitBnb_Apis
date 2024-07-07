@@ -4,12 +4,12 @@ const jwt = require("jsonwebtoken");
 const { jwtDecode } = require("jwt-decode");
 const cookieParser = require("cookie-parser");
 const router = express.Router();
-const secretKey = process.env.SecretKey;
+const ownerSecretKey = process.env.OwnerSecretKey;
 router.use(cors());
 router.use(express.json());
 router.use(cookieParser());
 // Verify token route
-router.get("/userVerify", (req, res) => {
+router.get("/ownerVerify", (req, res) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   // const authHeader = req.headers["authorization"];
@@ -18,16 +18,16 @@ router.get("/userVerify", (req, res) => {
     return res.status(401).json({ success: false, message: "Token not Found" });
   }
 
-  jwt.verify(token, secretKey, (err, decoded) => {
+  jwt.verify(token, ownerSecretKey, (err, decoded) => {
     if (err) {
       return res
         .status(401)
         .json({ success: false, message: "TimeOut Please Login Again" });
     }
-    const userData = jwtDecode(token);
-    console.log(userData);
+    const ownerData = jwtDecode(token);
+    // console.log(ownerData);
     // Token is valid
-    res.json({ success: true, userData });
+    res.json({ success: true, ownerData });
   });
 });
 module.exports = router;

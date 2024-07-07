@@ -27,7 +27,9 @@ app.use("/", UserRoutes);
 const OwnerRoutes = require("./Routes/Owner");
 app.use("/", OwnerRoutes);
 const UserLoginVerification = require("./Middleware/UserLoginVerification");
+const OwnerLoginVerification = require("./Middleware/OwnerLoginVerification");
 app.use("/", UserLoginVerification);
+app.use("/", OwnerLoginVerification);
 app.get("/", (req, res) => {
   res.send("Server is Running");
 });
