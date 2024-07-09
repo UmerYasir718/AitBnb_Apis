@@ -83,7 +83,7 @@ module.exports.OwnerForgetPassword = async (req, res) => {
       const subject = `Reset Password of AirBnd Owner`;
       const resetLink = `http://localhost:3000/OwnerReset-Password/${id}/${token}`;
       const body = `
-Dear ${existingOwner.userName},
+Dear ${existingOwner.ownerName},
 This email is to reset your password for your Airbnb account.
 Click on the link below to reset your password. This link is valid for 5 minutes:
 <a href="${resetLink}">Reset Link</a>
