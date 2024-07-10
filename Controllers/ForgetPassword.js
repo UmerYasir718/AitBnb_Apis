@@ -26,7 +26,7 @@ module.exports.UserForgetPassword = async (req, res) => {
     if (existingUser) {
       const id = existingUser._id;
       const token = jwt.sign({ id }, process.env.UserSecretKey, {
-        expiresIn: "30M",
+        expiresIn: "5M",
       });
       //   res.cookie("token", token, { httpOnly: true });
       const subject = `Reset Password of AirBnd `;
@@ -35,7 +35,7 @@ module.exports.UserForgetPassword = async (req, res) => {
 Dear ${existingUser.userName},
 This email is to reset your password for your Airbnb account.
 Click on the link below to reset your password. This link is valid for 5 minutes:
-<a href="${resetLink}">Reset Link</a>
+${resetLink}
 If you have any questions, please don't hesitate to contact us.
 Thanks,
 The Airbnb Team
@@ -77,7 +77,7 @@ module.exports.OwnerForgetPassword = async (req, res) => {
     if (existingOwner) {
       const id = existingOwner._id;
       const token = jwt.sign({ id }, process.env.OwnerSecretKey, {
-        expiresIn: "30M",
+        expiresIn: "5M",
       });
       //   res.cookie("token", token, { httpOnly: true });
       const subject = `Reset Password of AirBnd Owner`;
@@ -86,7 +86,7 @@ module.exports.OwnerForgetPassword = async (req, res) => {
 Dear ${existingOwner.ownerName},
 This email is to reset your password for your Airbnb account.
 Click on the link below to reset your password. This link is valid for 5 minutes:
-<a href="${resetLink}">Reset Link</a>
+${resetLink}
 If you have any questions, please don't hesitate to contact us.
 Thanks,
 The Airbnb Team

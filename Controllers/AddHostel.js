@@ -27,7 +27,7 @@ module.exports.AddHostel = async (req, res) => {
     ) {
       return res
         .status(400)
-        .json({ error: "Please provide all required fields" });
+        .json({ message: "Please provide all required fields" });
     }
 
     const uploadedImage = req.files.image;
