@@ -8,7 +8,7 @@ module.exports.OwnerRegistration = async (req, res) => {
     if (!ownerEmail || !ownerPassword || !ownerName || !ownerCNIC) {
       return res
         .status(400)
-        .json({ error: "Please provide all required fields" });
+        .json({ message: "Please provide all required fields" });
     }
     const OwnerNameUnique = await ownerData.findOne({ ownerName: ownerName });
     if (OwnerNameUnique) {
